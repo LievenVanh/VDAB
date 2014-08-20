@@ -21,6 +21,7 @@ namespace _07_Klant_wijzigen
     
         public int KlantNr { get; set; }
         public string Voornaam { get; set; }
+        public byte[] Aangepast { get; set; }
     
         public virtual ICollection<Rekening> Rekeningen { get; set; }
     }

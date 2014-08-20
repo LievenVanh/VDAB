@@ -19,6 +19,7 @@
           </Key>
           <Property Name="KlantNr" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Voornaam" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Aangepast" Type="timestamp" Nullable="false" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="Rekeningen">
           <Key>
@@ -61,6 +62,7 @@
           <Property Name="KlantNr" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="Voornaam" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Rekeningen" Relationship="BankModel.FK__Rekeninge__Klant__0519C6AF" FromRole="Klanten" ToRole="Rekeningen" />
+          <Property Type="Binary" Name="Aangepast" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" ConcurrencyMode="Fixed" />
         </EntityType>
         <EntityType Name="Rekening">
           <Key>
@@ -71,7 +73,7 @@
           <Property Name="Saldo" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
           <Property Name="Soort" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
           <NavigationProperty Name="Klant" Relationship="BankModel.FK__Rekeninge__Klant__0519C6AF" FromRole="Rekeningen" ToRole="Klanten" />
-          <Property Type="Binary" Name="Aangepast" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Type="Binary" Name="Aangepast" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" ConcurrencyMode="Fixed" />
         </EntityType>
         <Association Name="FK__Rekeninge__Klant__0519C6AF">
           <End Role="Klanten" Type="BankModel.Klant" Multiplicity="1" />
@@ -94,6 +96,7 @@
           <EntitySetMapping Name="Klanten">
             <EntityTypeMapping TypeName="BankModel.Klant">
               <MappingFragment StoreEntitySet="Klanten">
+                <ScalarProperty Name="Aangepast" ColumnName="Aangepast" />
                 <ScalarProperty Name="KlantNr" ColumnName="KlantNr" />
                 <ScalarProperty Name="Voornaam" ColumnName="Voornaam" />
               </MappingFragment>
