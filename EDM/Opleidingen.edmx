@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="OpleidingenModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="OpleidingenModelStoreContainer">
+          <EntitySet Name="Campussen" EntityType="OpleidingenModel.Store.Campussen" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Docenten" EntityType="OpleidingenModel.Store.Docenten" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Voorraden" EntityType="OpleidingenModel.Store.Voorraden" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK__Docenten__Campus__0519C6AF" Association="OpleidingenModel.Store.FK__Docenten__Campus__0519C6AF">
+            <End Role="Campussen" EntitySet="Campussen" />
+            <End Role="Docenten" EntitySet="Docenten" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Campussen">
+          <Key>
+            <PropertyRef Name="CampusNr" />
+          </Key>
+          <Property Name="CampusNr" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Naam" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Straat" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="HuisNr" Type="nvarchar" Nullable="false" MaxLength="10" />
+          <Property Name="PostCode" Type="nvarchar" Nullable="false" MaxLength="10" />
+          <Property Name="Gemeente" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Docenten">
+          <Key>
+            <PropertyRef Name="DocentNr" />
+          </Key>
+          <Property Name="DocentNr" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Voornaam" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Familienaam" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Wedde" Type="decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="CampusNr" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Voorraden">
+          <Key>
+            <PropertyRef Name="MagazijnNr" />
+            <PropertyRef Name="ArtikelNr" />
+          </Key>
+          <Property Name="MagazijnNr" Type="int" Nullable="false" />
+          <Property Name="ArtikelNr" Type="int" Nullable="false" />
+          <Property Name="AantalStuks" Type="int" Nullable="false" />
+          <Property Name="RekNr" Type="int" Nullable="false" />
+          <Property Name="Aangepast" Type="timestamp" Nullable="false" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <Association Name="FK__Docenten__Campus__0519C6AF">
+          <End Role="Campussen" Type="OpleidingenModel.Store.Campussen" Multiplicity="1" />
+          <End Role="Docenten" Type="OpleidingenModel.Store.Docenten" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Campussen">
+              <PropertyRef Name="CampusNr" />
+            </Principal>
+            <Dependent Role="Docenten">
+              <PropertyRef Name="CampusNr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="OpleidingenModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="OpleidingenEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Campussen" EntityType="OpleidingenModel.Campus" />
+          <EntitySet Name="Docenten" EntityType="OpleidingenModel.Docent" />
+          <AssociationSet Name="FK__Docenten__Campus__0519C6AF" Association="OpleidingenModel.FK__Docenten__Campus__0519C6AF">
+            <End Role="Campussen" EntitySet="Campussen" />
+            <End Role="Docenten" EntitySet="Docenten" />
+          </AssociationSet>
+          <EntitySet Name="Voorraden" EntityType="OpleidingenModel.Voorraad" />
+        </EntityContainer>
+        <EntityType Name="Campus">
+          <Key>
+            <PropertyRef Name="CampusNr" />
+          </Key>
+          <Property Name="CampusNr" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Naam" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Straat" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="HuisNr" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="PostCode" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="Gemeente" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Docenten" Relationship="OpleidingenModel.FK__Docenten__Campus__0519C6AF" FromRole="Campussen" ToRole="Docenten" />
+        </EntityType>
+        <EntityType Name="Docent">
+          <Key>
+            <PropertyRef Name="DocentNr" />
+          </Key>
+          <Property Name="DocentNr" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Voornaam" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Familienaam" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Wedde" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="CampusNr" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Campus" Relationship="OpleidingenModel.FK__Docenten__Campus__0519C6AF" FromRole="Docenten" ToRole="Campussen" />
+        </EntityType>
+        <Association Name="FK__Docenten__Campus__0519C6AF">
+          <End Role="Campussen" Type="OpleidingenModel.Campus" Multiplicity="1" />
+          <End Role="Docenten" Type="OpleidingenModel.Docent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Campussen">
+              <PropertyRef Name="CampusNr" />
+            </Principal>
+            <Dependent Role="Docenten">
+              <PropertyRef Name="CampusNr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Voorraad">
+          <Key>
+            <PropertyRef Name="MagazijnNr" />
+            <PropertyRef Name="ArtikelNr" />
+          </Key>
+          <Property Type="Int32" Name="MagazijnNr" Nullable="false" ConcurrencyMode="None" />
+          <Property Type="Int32" Name="ArtikelNr" Nullable="false" ConcurrencyMode="None" />
+          <Property Type="Int32" Name="AantalStuks" Nullable="false" ConcurrencyMode="None" />
+          <Property Type="Int32" Name="RekNr" Nullable="false" ConcurrencyMode="None" />
+          <Property Type="Binary" Name="Aangepast" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" ConcurrencyMode="Fixed" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="OpleidingenModelStoreContainer" CdmEntityContainer="OpleidingenEntities">
+          <EntitySetMapping Name="Campussen">
+            <EntityTypeMapping TypeName="OpleidingenModel.Campus">
+              <MappingFragment StoreEntitySet="Campussen">
+                <ScalarProperty Name="CampusNr" ColumnName="CampusNr" />
+                <ScalarProperty Name="Naam" ColumnName="Naam" />
+                <ScalarProperty Name="Straat" ColumnName="Straat" />
+                <ScalarProperty Name="HuisNr" ColumnName="HuisNr" />
+                <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+                <ScalarProperty Name="Gemeente" ColumnName="Gemeente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Docenten">
+            <EntityTypeMapping TypeName="OpleidingenModel.Docent">
+              <MappingFragment StoreEntitySet="Docenten">
+                <ScalarProperty Name="DocentNr" ColumnName="DocentNr" />
+                <ScalarProperty Name="Voornaam" ColumnName="Voornaam" />
+                <ScalarProperty Name="Familienaam" ColumnName="Familienaam" />
+                <ScalarProperty Name="Wedde" ColumnName="Wedde" />
+                <ScalarProperty Name="CampusNr" ColumnName="CampusNr" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Voorraden">
+            <EntityTypeMapping TypeName="OpleidingenModel.Voorraad">
+              <MappingFragment StoreEntitySet="Voorraden">
+                <ScalarProperty Name="Aangepast" ColumnName="Aangepast" />
+                <ScalarProperty Name="RekNr" ColumnName="RekNr" />
+                <ScalarProperty Name="AantalStuks" ColumnName="AantalStuks" />
+                <ScalarProperty Name="ArtikelNr" ColumnName="ArtikelNr" />
+                <ScalarProperty Name="MagazijnNr" ColumnName="MagazijnNr" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
