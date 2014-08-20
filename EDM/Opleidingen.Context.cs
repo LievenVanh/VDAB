@@ -28,5 +28,7 @@ namespace EDM
         public DbSet<Campus> Campussen { get; set; }
         public DbSet<Docent> Docenten { get; set; }
         public DbSet<Voorraad> Voorraden { get; set; }
+        public DbSet<Boek> Boeken { get; set; }
+        public DbSet<Cursus> Cursussen { get; set; }
     }
 }

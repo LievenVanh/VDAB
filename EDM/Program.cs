@@ -15,22 +15,24 @@ namespace EDM
     {
         private static void Main(string[] args)
         {
-            try
-            {
-                Console.Write("Artikelnummer: ");
-                var artikelNr = int.Parse(Console.ReadLine());
-                Console.Write("Van magazijn nr: ");
-                var vanMag = int.Parse(Console.ReadLine());
-                Console.Write("Naar magazijn nr: ");
-                var naarMag = int.Parse(Console.ReadLine());
-                Console.Write("Aantal stuks: ");
-                var aantal = int.Parse(Console.ReadLine());
-                new Program().VoorraadTransfer(artikelNr, vanMag, naarMag, aantal);
-            }
-            catch (FormatException)
-            {
-                Console.WriteLine("Tik een getal");
-            }
+            new Program().ToonAlleCursussenMetBoeken();
+            Console.ReadLine();
+            //try
+            //{
+            //    Console.Write("Artikelnummer: ");
+            //    var artikelNr = int.Parse(Console.ReadLine());
+            //    Console.Write("Van magazijn nr: ");
+            //    var vanMag = int.Parse(Console.ReadLine());
+            //    Console.Write("Naar magazijn nr: ");
+            //    var naarMag = int.Parse(Console.ReadLine());
+            //    Console.Write("Aantal stuks: ");
+            //    var aantal = int.Parse(Console.ReadLine());
+            //    new Program().VoorraadTransfer(artikelNr, vanMag, naarMag, aantal);
+            //}
+            //catch (FormatException)
+            //{
+            //    Console.WriteLine("Tik een getal");
+            //}
         }
 
         private void VoorraadTransfer(int artikelNr, int vanMagazijn, int naarMagazijn, int aantalStuks)
@@ -98,6 +100,44 @@ namespace EDM
                 else
                 {
                     Console.WriteLine("Artikel {0} niet gevonden in magazijn {1}",artikelNr, magazijnNr);
+                }
+            }
+        }
+
+        private void ToonAlleBoekenMetCursussen()
+        {
+            using (var opleidingenEntities = new OpleidingenEntities())
+            {
+                var query = from boek in opleidingenEntities.Boeken.Include("Cursussen")
+                            orderby boek.Titel
+                            select boek;
+                foreach (var boek in query)
+                {
+                    Console.WriteLine(boek.Titel);
+                    foreach (var cursus in boek.Cursussen)
+                    {
+                        Console.WriteLine("\t{0}", cursus.Naam);
+                    }
+                    Console.WriteLine();
+                }
+            }
+        }
+
+        private void ToonAlleCursussenMetBoeken()
+        {
+            using (var opleidingenEntities = new OpleidingenEntities())
+            {
+                var query = from cursus in opleidingenEntities.Cursussen.Include("Boeken")
+                            orderby cursus.Naam
+                            select cursus;
+                foreach (var cursus in query)
+                {
+                    Console.WriteLine(cursus.Naam);
+                    foreach (var boek in cursus.Boeken)
+                    {
+                        Console.WriteLine("\t{0}", boek.Titel);
+                    }
+                    Console.WriteLine();
                 }
             }
         }
