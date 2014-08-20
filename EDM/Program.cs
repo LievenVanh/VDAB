@@ -141,6 +141,26 @@ namespace EDM
                 }
             }
         }
+
+        private void BoekToevoegen()
+        {
+            using (var opleidingenEntities = new OpleidingenEntities())
+            {
+                var boek = new Boek {ISBNNr = "0-0788210-6-1", Titel = "Oracle Backup & Recovery Handbook"};
+                var oracleCursus =
+                    (from cursus in opleidingenEntities.Cursussen where cursus.Naam == "Oracle" select cursus)
+                        .FirstOrDefault();
+                if (oracleCursus != null)
+                {
+                    oracleCursus.Boeken.Add(boek);
+                    opleidingenEntities.SaveChanges();
+                }
+                else
+                {
+                    Console.WriteLine("cursus Oracle niet gevonden");
+                }
+            }
+        }
     }
 
 
