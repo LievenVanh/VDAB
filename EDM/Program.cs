@@ -15,7 +15,7 @@ namespace EDM
     {
         private static void Main(string[] args)
         {
-            new Program().ToonAlleCursussenMetBoeken();
+            new Program().VoegBoekToe();
             Console.ReadLine();
             //try
             //{
@@ -104,61 +104,117 @@ namespace EDM
             }
         }
 
-        private void ToonAlleBoekenMetCursussen()
+        //private void ToonAlleBoekenMetCursussen()
+        //{
+        //    using (var opleidingenEntities = new OpleidingenEntities())
+        //    {
+        //        var query = from boek in opleidingenEntities.Boeken.Include("Cursussen")
+        //                    orderby boek.Titel
+        //                    select boek;
+        //        foreach (var boek in query)
+        //        {
+        //            Console.WriteLine(boek.Titel);
+        //            foreach (var cursus in boek.Cursussen)
+        //            {
+        //                Console.WriteLine("\t{0}", cursus.Naam);
+        //            }
+        //            Console.WriteLine();
+        //        }
+        //    }
+        //}
+
+        //private void ToonAlleCursussenMetBoeken()
+        //{
+        //    using (var opleidingenEntities = new OpleidingenEntities())
+        //    {
+        //        var query = from cursus in opleidingenEntities.Cursussen.Include("Boeken")
+        //                    orderby cursus.Naam
+        //                    select cursus;
+        //        foreach (var cursus in query)
+        //        {
+        //            Console.WriteLine(cursus.Naam);
+        //            foreach (var boek in cursus.Boeken)
+        //            {
+        //                Console.WriteLine("\t{0}", boek.Titel);
+        //            }
+        //            Console.WriteLine();
+        //        }
+        //    }
+        //}
+
+        //private void BoekToevoegen()
+        //{
+        //    using (var opleidingenEntities = new OpleidingenEntities())
+        //    {
+        //        var boek = new Boek { ISBNNr = "0-0788210-6-1", Titel = "Oracle Backup & Recovery Handbook" };
+        //        var oracleCursus =
+        //            (from cursus in opleidingenEntities.Cursussen where cursus.Naam == "Oracle" select cursus)
+        //                .FirstOrDefault();
+        //        if (oracleCursus != null)
+        //        {
+        //            oracleCursus.Boeken.Add(boek);
+        //            opleidingenEntities.SaveChanges();
+        //            Console.WriteLine("Boek toegevoegd");
+        //        }
+        //        else
+        //        {
+        //            Console.WriteLine("cursus Oracle niet gevonden");
+        //        }
+        //    }
+        //}
+
+        private void ToonAlleBoekenInCursus()
         {
             using (var opleidingenEntities = new OpleidingenEntities())
             {
-                var query = from boek in opleidingenEntities.Boeken.Include("Cursussen")
-                            orderby boek.Titel
-                            select boek;
-                foreach (var boek in query)
+                var query = from boekCursus in opleidingenEntities.BoekenCursussen.Include("Boek").Include("Cursus")
+                    orderby boekCursus.Cursus.Naam, boekCursus.VolgNr
+                    select boekCursus;
+                var vorigCursusNr = 0;
+                foreach (var boekCursus in query)
                 {
-                    Console.WriteLine(boek.Titel);
-                    foreach (var cursus in boek.Cursussen)
+                    if (boekCursus.Cursus.CursusNr != vorigCursusNr)
                     {
-                        Console.WriteLine("\t{0}", cursus.Naam);
+                        Console.WriteLine(boekCursus.Cursus.Naam);
+                        vorigCursusNr = boekCursus.Cursus.CursusNr;
                     }
-                    Console.WriteLine();
+                    Console.WriteLine("\t{0}: {1}",boekCursus.VolgNr, boekCursus.Boek.Titel);
+
                 }
             }
         }
 
-        private void ToonAlleCursussenMetBoeken()
+        private void VoegBoekToe()
         {
-            using (var opleidingenEntities = new OpleidingenEntities())
+            var nieuwBoek = new Boek {ISBNNr = "0-201-70431-5", Titel = "Modern C++ Design"};
+            var transactionOptions = new TransactionOptions() {IsolationLevel = IsolationLevel.Serializable};
+            using (var transactionScope = new TransactionScope(TransactionScopeOption.Required, transactionOptions))
             {
-                var query = from cursus in opleidingenEntities.Cursussen.Include("Boeken")
-                            orderby cursus.Naam
-                            select cursus;
-                foreach (var cursus in query)
+                using (var opleidingenEntities = new OpleidingenEntities())
                 {
-                    Console.WriteLine(cursus.Naam);
-                    foreach (var boek in cursus.Boeken)
+                    var query = from cursus in opleidingenEntities.Cursussen.Include("BoekenCursussen")
+                        where cursus.Naam == "C++"
+                        select
+                            new
+                            {
+                                Cursus = cursus,
+                                HoogsteVolgNr = cursus.BoekenCursussen.Max(BoekCursus => BoekCursus.VolgNr)
+                            };
+                    var queryresult = query.FirstOrDefault();
+                    if (queryresult != null)
                     {
-                        Console.WriteLine("\t{0}", boek.Titel);
+                        opleidingenEntities.BoekenCursussen.Add(new BoekCursus()
+                        {
+                            Boek = nieuwBoek,
+                            Cursus = queryresult.Cursus,
+                            VolgNr = queryresult.HoogsteVolgNr + 1
+                        });
+                        opleidingenEntities.SaveChanges();
                     }
-                    Console.WriteLine();
-                }
-            }
-        }
+                    transactionScope.Complete();
 
-        private void BoekToevoegen()
-        {
-            using (var opleidingenEntities = new OpleidingenEntities())
-            {
-                var boek = new Boek {ISBNNr = "0-0788210-6-1", Titel = "Oracle Backup & Recovery Handbook"};
-                var oracleCursus =
-                    (from cursus in opleidingenEntities.Cursussen where cursus.Naam == "Oracle" select cursus)
-                        .FirstOrDefault();
-                if (oracleCursus != null)
-                {
-                    oracleCursus.Boeken.Add(boek);
-                    opleidingenEntities.SaveChanges();
                 }
-                else
-                {
-                    Console.WriteLine("cursus Oracle niet gevonden");
-                }
+                
             }
         }
     }

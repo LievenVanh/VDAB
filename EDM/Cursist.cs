@@ -12,17 +12,19 @@ namespace EDM
     using System;
     using System.Collections.Generic;
     
-    public partial class Boek
+    public partial class Cursist
     {
-        public Boek()
+        public Cursist()
         {
-            this.BoekenCursussen = new HashSet<BoekCursus>();
+            this.Beschermelingen = new HashSet<Cursist>();
         }
     
-        public int BoekNr { get; set; }
-        public string ISBNNr { get; set; }
-        public string Titel { get; set; }
+        public int CursistNr { get; set; }
+        public string Voornaam { get; set; }
+        public string Familienaam { get; set; }
+        public Nullable<int> MentorNr { get; set; }
     
-        public virtual ICollection<BoekCursus> BoekenCursussen { get; set; }
+        public virtual ICollection<Cursist> Beschermelingen { get; set; }
+        public virtual Cursist Mentor { get; set; }
     }
 }

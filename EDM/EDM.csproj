@@ -52,7 +52,13 @@
     <Compile Include="Boek.cs">
       <DependentUpon>Opleidingen.tt</DependentUpon>
     </Compile>
+    <Compile Include="BoekCursus.cs">
+      <DependentUpon>Opleidingen.tt</DependentUpon>
+    </Compile>
     <Compile Include="Campus.cs">
+      <DependentUpon>Opleidingen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Cursist.cs">
       <DependentUpon>Opleidingen.tt</DependentUpon>
     </Compile>
     <Compile Include="Cursus.cs">

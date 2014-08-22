@@ -16,12 +16,12 @@ namespace EDM
     {
         public Cursus()
         {
-            this.Boeken = new HashSet<Boek>();
+            this.BoekenCursussen = new HashSet<BoekCursus>();
         }
     
         public int CursusNr { get; set; }
         public string Naam { get; set; }
     
-        public virtual ICollection<Boek> Boeken { get; set; }
+        public virtual ICollection<BoekCursus> BoekenCursussen { get; set; }
     }
 }
