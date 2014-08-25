@@ -10,22 +10,10 @@
 namespace EDM
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Docent
+    public partial class AantalDocentenPerVoornaam_Result
     {
-        public Docent()
-        {
-            this.Naam = new Naam();
-        }
-    
-        public int DocentNr { get; set; }
-        public decimal Wedde { get; set; }
-        public int CampusNr { get; set; }
-        public Nullable<Geslacht> Geslacht { get; set; }
-    
-        public Naam Naam { get; set; }
-    
-        public virtual Campus Campus { get; set; }
+        public string Voornaam { get; set; }
+        public Nullable<int> Aantal { get; set; }
     }
 }

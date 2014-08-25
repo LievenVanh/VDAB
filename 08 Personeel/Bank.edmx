@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Bank3Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="Bank3ModelStoreContainer">
+          <EntitySet Name="Klanten" EntityType="Bank3Model.Store.Klanten" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Personeel" EntityType="Bank3Model.Store.Personeel" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Rekeningen" EntityType="Bank3Model.Store.Rekeningen" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK__Personeel__Manag__0AD2A005" Association="Bank3Model.Store.FK__Personeel__Manag__0AD2A005">
+            <End Role="Personeel" EntitySet="Personeel" />
+            <End Role="Personeel1" EntitySet="Personeel" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Rekeninge__Klant__0519C6AF" Association="Bank3Model.Store.FK__Rekeninge__Klant__0519C6AF">
+            <End Role="Klanten" EntitySet="Klanten" />
+            <End Role="Rekeningen" EntitySet="Rekeningen" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Klanten">
+          <Key>
+            <PropertyRef Name="KlantNr" />
+          </Key>
+          <Property Name="KlantNr" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Voornaam" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Aangepast" Type="timestamp" Nullable="false" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="Personeel">
+          <Key>
+            <PropertyRef Name="PersoneelsNr" />
+          </Key>
+          <Property Name="PersoneelsNr" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Voornaam" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="ManagerNr" Type="int" />
+        </EntityType>
+        <EntityType Name="Rekeningen">
+          <Key>
+            <PropertyRef Name="RekeningNr" />
+          </Key>
+          <Property Name="RekeningNr" Type="nvarchar" Nullable="false" MaxLength="20" />
+          <Property Name="KlantNr" Type="int" Nullable="false" />
+          <Property Name="Saldo" Type="decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Soort" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="Aangepast" Type="timestamp" Nullable="false" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <Association Name="FK__Personeel__Manag__0AD2A005">
+          <End Role="Personeel" Type="Bank3Model.Store.Personeel" Multiplicity="0..1" />
+          <End Role="Personeel1" Type="Bank3Model.Store.Personeel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personeel">
+              <PropertyRef Name="PersoneelsNr" />
+            </Principal>
+            <Dependent Role="Personeel1">
+              <PropertyRef Name="ManagerNr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Rekeninge__Klant__0519C6AF">
+          <End Role="Klanten" Type="Bank3Model.Store.Klanten" Multiplicity="1" />
+          <End Role="Rekeningen" Type="Bank3Model.Store.Rekeningen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Klanten">
+              <PropertyRef Name="KlantNr" />
+            </Principal>
+            <Dependent Role="Rekeningen">
+              <PropertyRef Name="KlantNr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Bank3Model" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="BankEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Klanten" EntityType="Bank3Model.Klant" />
+          <EntitySet Name="Personeel" EntityType="Bank3Model.Personeel" />
+          <EntitySet Name="Rekeningen" EntityType="Bank3Model.Rekening" />
+          <AssociationSet Name="FK__Rekeninge__Klant__0519C6AF" Association="Bank3Model.FK__Rekeninge__Klant__0519C6AF">
+            <End Role="Klanten" EntitySet="Klanten" />
+            <End Role="Rekeningen" EntitySet="Rekeningen" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Personeel__Manag__0AD2A005" Association="Bank3Model.FK__Personeel__Manag__0AD2A005">
+            <End Role="Personeel" EntitySet="Personeel" />
+            <End Role="Personeel1" EntitySet="Personeel" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="Klant">
+          <Key>
+            <PropertyRef Name="KlantNr" />
+          </Key>
+          <Property Name="KlantNr" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Voornaam" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Aangepast" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" p1:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="Rekeningen" Relationship="Bank3Model.FK__Rekeninge__Klant__0519C6AF" FromRole="Klanten" ToRole="Rekeningen" />
+        </EntityType>
+        <EntityType Name="Personeel">
+          <Key>
+            <PropertyRef Name="PersoneelsNr" />
+          </Key>
+          <Property Name="PersoneelsNr" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Voornaam" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="ManagerNr" Type="Int32" />
+          <NavigationProperty Name="Ondergeschikten" Relationship="Bank3Model.FK__Personeel__Manag__0AD2A005" FromRole="Personeel" ToRole="Personeel1" />
+          <NavigationProperty Name="Manager" Relationship="Bank3Model.FK__Personeel__Manag__0AD2A005" FromRole="Personeel1" ToRole="Personeel" />
+        </EntityType>
+        <EntityType Name="Rekening" Abstract="false">
+          <Key>
+            <PropertyRef Name="RekeningNr" />
+          </Key>
+          <Property Name="RekeningNr" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="KlantNr" Type="Int32" Nullable="false" />
+          <Property Name="Saldo" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Soort" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="Aangepast" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" p1:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="Klant" Relationship="Bank3Model.FK__Rekeninge__Klant__0519C6AF" FromRole="Rekeningen" ToRole="Klanten" />
+        </EntityType>
+        <Association Name="FK__Rekeninge__Klant__0519C6AF">
+          <End Role="Klanten" Type="Bank3Model.Klant" Multiplicity="1" />
+          <End Role="Rekeningen" Type="Bank3Model.Rekening" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Klanten">
+              <PropertyRef Name="KlantNr" />
+            </Principal>
+            <Dependent Role="Rekeningen">
+              <PropertyRef Name="KlantNr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Personeel__Manag__0AD2A005">
+          <End Role="Personeel" Type="Bank3Model.Personeel" Multiplicity="0..1" />
+          <End Role="Personeel1" Type="Bank3Model.Personeel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personeel">
+              <PropertyRef Name="PersoneelsNr" />
+            </Principal>
+            <Dependent Role="Personeel1">
+              <PropertyRef Name="ManagerNr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Bank3ModelStoreContainer" CdmEntityContainer="BankEntities">
+          <EntitySetMapping Name="Klanten">
+            <EntityTypeMapping TypeName="Bank3Model.Klant">
+              <MappingFragment StoreEntitySet="Klanten">
+                <ScalarProperty Name="KlantNr" ColumnName="KlantNr" />
+                <ScalarProperty Name="Voornaam" ColumnName="Voornaam" />
+                <ScalarProperty Name="Aangepast" ColumnName="Aangepast" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Personeel">
+            <EntityTypeMapping TypeName="Bank3Model.Personeel">
+              <MappingFragment StoreEntitySet="Personeel">
+                <ScalarProperty Name="PersoneelsNr" ColumnName="PersoneelsNr" />
+                <ScalarProperty Name="Voornaam" ColumnName="Voornaam" />
+                <ScalarProperty Name="ManagerNr" ColumnName="ManagerNr" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rekeningen">
+            <EntityTypeMapping TypeName="IsTypeOf(Bank3Model.Rekening)">
+              <MappingFragment StoreEntitySet="Rekeningen">
+                <ScalarProperty Name="RekeningNr" ColumnName="RekeningNr" />
+                <ScalarProperty Name="Aangepast" ColumnName="Aangepast" />
+                <ScalarProperty Name="Soort" ColumnName="Soort" />
+                <ScalarProperty Name="Saldo" ColumnName="Saldo" />
+                <ScalarProperty Name="KlantNr" ColumnName="KlantNr" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

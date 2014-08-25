@@ -7,25 +7,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EDM
+namespace _08_Personeel
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Cursist
+    public partial class Personeel
     {
-        public Cursist()
+        public Personeel()
         {
-            this.Beschermelingen = new HashSet<Cursist>();
-            this.Naam = new Naam();
+            this.Ondergeschikten = new HashSet<Personeel>();
         }
     
-        public int CursistNr { get; set; }
-        public Nullable<int> MentorNr { get; set; }
+        public int PersoneelsNr { get; set; }
+        public string Voornaam { get; set; }
+        public Nullable<int> ManagerNr { get; set; }
     
-        public Naam Naam { get; set; }
-    
-        public virtual ICollection<Cursist> Beschermelingen { get; set; }
-        public virtual Cursist Mentor { get; set; }
+        public virtual ICollection<Personeel> Ondergeschikten { get; set; }
+        public virtual Personeel Manager { get; set; }
     }
 }

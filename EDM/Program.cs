@@ -15,24 +15,11 @@ namespace EDM
     {
         private static void Main(string[] args)
         {
-            new Program().VoegBoekToe();
+
+            new Program().AantalDocentenPerVoornaam();
+
             Console.ReadLine();
-            //try
-            //{
-            //    Console.Write("Artikelnummer: ");
-            //    var artikelNr = int.Parse(Console.ReadLine());
-            //    Console.Write("Van magazijn nr: ");
-            //    var vanMag = int.Parse(Console.ReadLine());
-            //    Console.Write("Naar magazijn nr: ");
-            //    var naarMag = int.Parse(Console.ReadLine());
-            //    Console.Write("Aantal stuks: ");
-            //    var aantal = int.Parse(Console.ReadLine());
-            //    new Program().VoorraadTransfer(artikelNr, vanMag, naarMag, aantal);
-            //}
-            //catch (FormatException)
-            //{
-            //    Console.WriteLine("Tik een getal");
-            //}
+
         }
 
         private void VoorraadTransfer(int artikelNr, int vanMagazijn, int naarMagazijn, int aantalStuks)
@@ -95,11 +82,11 @@ namespace EDM
                     {
                         Console.WriteLine("Record werd gewijzigd door een andere applicatie");
                     }
-                    
+
                 }
                 else
                 {
-                    Console.WriteLine("Artikel {0} niet gevonden in magazijn {1}",artikelNr, magazijnNr);
+                    Console.WriteLine("Artikel {0} niet gevonden in magazijn {1}", artikelNr, magazijnNr);
                 }
             }
         }
@@ -178,7 +165,7 @@ namespace EDM
                         Console.WriteLine(boekCursus.Cursus.Naam);
                         vorigCursusNr = boekCursus.Cursus.CursusNr;
                     }
-                    Console.WriteLine("\t{0}: {1}",boekCursus.VolgNr, boekCursus.Boek.Titel);
+                    Console.WriteLine("\t{0}: {1}", boekCursus.VolgNr, boekCursus.Boek.Titel);
 
                 }
             }
@@ -214,11 +201,50 @@ namespace EDM
                     transactionScope.Complete();
 
                 }
-                
+
             }
         }
+
+        private void BestBetaaldeDocentPerCampus()
+        {
+            using (var opleidingenEntities = new OpleidingenEntities())
+            {
+                var query = from bestBetaaldeDocentPerCampus in opleidingenEntities.BestBetaaldeDocentenPerCampus
+                    orderby bestBetaaldeDocentPerCampus.CampusNr,
+                        bestBetaaldeDocentPerCampus.Voornaam,
+                        bestBetaaldeDocentPerCampus.Familienaam
+                    select bestBetaaldeDocentPerCampus;
+                var vorigCampusNr = 0;
+                foreach (var docent in query)
+                {
+                    if (docent.CampusNr != vorigCampusNr)
+                    {
+                        Console.WriteLine("{0} {1} grootste wedde", docent.Naam, docent.GrootsteWedde);
+                        vorigCampusNr = docent.CampusNr;
+                    }
+                    Console.WriteLine("\t{0} {1}", docent.Voornaam, docent.Familienaam);
+
+                }
+            }
+        }
+
+        private void AantalDocentenPerVoornaam()
+        {
+            using (var opleidingenEntities = new OpleidingenEntities())
+            {
+                foreach (var voornaamAantal in opleidingenEntities.AantalDocentenPerVoornaam())
+                {
+                    Console.WriteLine("{0}: {1}", voornaamAantal.Voornaam, voornaamAantal.Aantal);
+                }
+            }
+        }
+
+        private void WeddeVerhoging()
+        {
+            
+        }
+
+
     }
-
-
 }
 

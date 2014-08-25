@@ -8,12 +8,7 @@ namespace EDM
 {
     public partial class Docent
     {
-        public string Naam
-        {
-            get { return Voornaam + ' ' + Familienaam; }
-
-        }
-
+        
         public void Opslag(decimal bedrag)
         {
             Wedde += bedrag;

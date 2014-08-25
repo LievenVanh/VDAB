@@ -12,20 +12,13 @@ namespace EDM
     using System;
     using System.Collections.Generic;
     
-    public partial class Cursist
+    public partial class BestBetaaldeDocentPerCampus
     {
-        public Cursist()
-        {
-            this.Beschermelingen = new HashSet<Cursist>();
-            this.Naam = new Naam();
-        }
-    
-        public int CursistNr { get; set; }
-        public Nullable<int> MentorNr { get; set; }
-    
-        public Naam Naam { get; set; }
-    
-        public virtual ICollection<Cursist> Beschermelingen { get; set; }
-        public virtual Cursist Mentor { get; set; }
+        public int CampusNr { get; set; }
+        public string Naam { get; set; }
+        public Nullable<decimal> GrootsteWedde { get; set; }
+        public int DocentNr { get; set; }
+        public string Voornaam { get; set; }
+        public string Familienaam { get; set; }
     }
 }

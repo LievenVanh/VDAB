@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "07 Klant wijzigen", "07 Kla
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "08 Personeel", "08 Personeel\08 Personeel.csproj", "{9B22B7A7-3FDE-4DBE-9B46-7AED8D69A956}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "09 Zichtrekening- Spaarrekening", "09 Zichtrekening- Spaarrekening\09 Zichtrekening- Spaarrekening.csproj", "{1CD17638-97C7-412D-BCBF-EF02C5BCB0A3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,10 @@ Global
 		{9B22B7A7-3FDE-4DBE-9B46-7AED8D69A956}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9B22B7A7-3FDE-4DBE-9B46-7AED8D69A956}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9B22B7A7-3FDE-4DBE-9B46-7AED8D69A956}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CD17638-97C7-412D-BCBF-EF02C5BCB0A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CD17638-97C7-412D-BCBF-EF02C5BCB0A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CD17638-97C7-412D-BCBF-EF02C5BCB0A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CD17638-97C7-412D-BCBF-EF02C5BCB0A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -32,8 +32,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,11 +48,56 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bank.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Bank.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Bank.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Bank.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Bank.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Bank.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Klant.cs">
+      <DependentUpon>Bank.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Personeel.cs">
+      <DependentUpon>Bank.tt</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rekening.cs">
+      <DependentUpon>Bank.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <EntityDeploy Include="Bank.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Bank.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Bank.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Bank.edmx</DependentUpon>
+      <LastGenOutput>Bank.Context.cs</LastGenOutput>
+    </None>
+    <None Include="Bank.edmx.diagram">
+      <DependentUpon>Bank.edmx</DependentUpon>
+    </None>
+    <None Include="Bank.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Bank.edmx</DependentUpon>
+      <LastGenOutput>Bank.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

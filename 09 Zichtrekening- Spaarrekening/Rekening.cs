@@ -7,25 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EDM
+namespace _09_Zichtrekening__Spaarrekening
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Cursist
+    public abstract partial class Rekening
     {
-        public Cursist()
-        {
-            this.Beschermelingen = new HashSet<Cursist>();
-            this.Naam = new Naam();
-        }
+        public string RekeningNr { get; set; }
+        public int KlantNr { get; set; }
+        public decimal Saldo { get; set; }
+        public byte[] Aangepast { get; set; }
     
-        public int CursistNr { get; set; }
-        public Nullable<int> MentorNr { get; set; }
-    
-        public Naam Naam { get; set; }
-    
-        public virtual ICollection<Cursist> Beschermelingen { get; set; }
-        public virtual Cursist Mentor { get; set; }
+        public virtual Klant Klant { get; set; }
     }
 }
