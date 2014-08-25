@@ -21,6 +21,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "08 Personeel", "08 Personee
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "09 Zichtrekening- Spaarrekening", "09 Zichtrekening- Spaarrekening\09 Zichtrekening- Spaarrekening.csproj", "{1CD17638-97C7-412D-BCBF-EF02C5BCB0A3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "10 Totale saldo per klant", "10 Totale saldo per klant\10 Totale saldo per klant.csproj", "{05DCA5BC-3811-43DE-8BEA-FB3B7D73E453}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "11 Administratieve kost", "11 Administratieve kost\11 Administratieve kost.csproj", "{824F722C-F13B-43DD-A05D-FF03D96ECB29}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +71,14 @@ Global
 		{1CD17638-97C7-412D-BCBF-EF02C5BCB0A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1CD17638-97C7-412D-BCBF-EF02C5BCB0A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1CD17638-97C7-412D-BCBF-EF02C5BCB0A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05DCA5BC-3811-43DE-8BEA-FB3B7D73E453}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05DCA5BC-3811-43DE-8BEA-FB3B7D73E453}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05DCA5BC-3811-43DE-8BEA-FB3B7D73E453}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05DCA5BC-3811-43DE-8BEA-FB3B7D73E453}.Release|Any CPU.Build.0 = Release|Any CPU
+		{824F722C-F13B-43DD-A05D-FF03D96ECB29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{824F722C-F13B-43DD-A05D-FF03D96ECB29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{824F722C-F13B-43DD-A05D-FF03D96ECB29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{824F722C-F13B-43DD-A05D-FF03D96ECB29}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
