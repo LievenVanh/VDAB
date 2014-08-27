@@ -25,6 +25,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "10 Totale saldo per klant",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "11 Administratieve kost", "11 Administratieve kost\11 Administratieve kost.csproj", "{824F722C-F13B-43DD-A05D-FF03D96ECB29}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeFirst", "CodeFirst\CodeFirst.csproj", "{C4129E3D-994F-418B-A072-428FABE39495}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "12 Code First", "12 Code First\12 Code First.csproj", "{1FD85320-0C0B-4451-AE1B-EADEB097A6C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpleidingenGemeenschappelijk", "OpleidingenGemeenschappelijk\OpleidingenGemeenschappelijk.csproj", "{625C73DE-5025-40C7-9F05-30B2204379B1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,6 +85,18 @@ Global
 		{824F722C-F13B-43DD-A05D-FF03D96ECB29}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{824F722C-F13B-43DD-A05D-FF03D96ECB29}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{824F722C-F13B-43DD-A05D-FF03D96ECB29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4129E3D-994F-418B-A072-428FABE39495}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4129E3D-994F-418B-A072-428FABE39495}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4129E3D-994F-418B-A072-428FABE39495}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4129E3D-994F-418B-A072-428FABE39495}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FD85320-0C0B-4451-AE1B-EADEB097A6C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FD85320-0C0B-4451-AE1B-EADEB097A6C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FD85320-0C0B-4451-AE1B-EADEB097A6C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FD85320-0C0B-4451-AE1B-EADEB097A6C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{625C73DE-5025-40C7-9F05-30B2204379B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{625C73DE-5025-40C7-9F05-30B2204379B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{625C73DE-5025-40C7-9F05-30B2204379B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{625C73DE-5025-40C7-9F05-30B2204379B1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

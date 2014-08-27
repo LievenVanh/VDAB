@@ -16,7 +16,7 @@ namespace _11_Administratieve_kost
             {
                 using (var bankEntities = new BankEntities())
                 {
-                    bankEntities.AdministratieveKost(adminKost);
+                    Console.WriteLine("{0} rekeningen aangepast", bankEntities.AdministratieveKost(adminKost));
                     Console.WriteLine("Administratieve kost toegepast");
                 }
             }
